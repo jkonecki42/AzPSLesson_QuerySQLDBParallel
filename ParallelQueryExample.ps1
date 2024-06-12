@@ -5,13 +5,13 @@
   Az.Sql Documentation https://learn.microsoft.com/en-us/powershell/module/az.sql/?view=azps-12.0.0
 #>
 
-#Connect-AzAccount -Subscription '12c13603-727c-44ab-953f-ae8f7ec9e183'
-
 # Environment Variables
-$resourceGroupName = 'Konecki_Test_RG'
+$resourceGroupName = 'yourresourcegroupname'
 $location = "North Central US"
 $throttleLimit = 10
-$adminCredential = Get-Credential
+$subscriptionName = "yoursubname"
+
+Connect-AzAccount -Subscription $subscriptionName
 
 ## SQL Server Section ##
 # Use splatting to enhance argument readability.
@@ -20,7 +20,7 @@ $serverArguments = @{
   Location                    = $location 
   ServerName                  = 'koneckiServer'
   ServerVersion               = "12.0" 
-  SqlAdministratorCredentials = $adminCredential
+  SqlAdministratorCredentials = (Get-Credential)
 }
 
 # Create the SQL Server Instance. If you want, you can capture the AzSqlServerModel output here as well.
